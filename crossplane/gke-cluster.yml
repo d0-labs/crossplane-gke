@@ -1,0 +1,85 @@
+---
+# API Reference: https://doc.crds.dev/github.com/crossplane/provider-gcp/container.gcp.crossplane.io/GKECluster/v1beta1@v0.16.0
+
+apiVersion: container.gcp.crossplane.io/v1beta1
+kind: GKECluster
+metadata:
+  name: gke-crossplane-cluster
+spec:
+  forProvider:
+    initialClusterVersion: "1.19"
+    network: "projects/development-labs/global/networks/opsnet"
+    subnetwork: "projects/development-labs/regions/us-central1/subnetworks/opsnet"
+    ipAllocationPolicy:
+      useIpAliases: true
+    defaultMaxPodsConstraint:
+      maxPodsPerNode: 110
+    addonsConfig:
+      cloudRunConfig:
+        disabled: true
+      dnsCacheConfig:
+        enabled: false
+      gcePersistentDiskCsiDriverConfig:
+        enabled: true
+      horizontalPodAutoscaling:
+        disabled: true
+      httpLoadBalancing:
+        disabled: false
+      istioConfig:
+        disabled: true
+        auth: "AUTH_NONE"
+      kalmConfig:
+        enabled: false
+      kubernetesDashboard:
+        disabled: true
+      networkPolicyConfig:
+        disabled: false
+    location: us-central1-a
+    binaryAuthorization: 
+      enabled: false
+    legacyAbac:
+      enabled: false
+    loggingService: "none"
+    masterAuth:
+      clientCertificateConfig:
+        issueClientCertificate: false
+    monitoringService: "none"
+---
+
+# API Reference: https://doc.crds.dev/github.com/crossplane/provider-gcp/container.gcp.crossplane.io/NodePool/v1alpha1@v0.16.0
+
+apiVersion: container.gcp.crossplane.io/v1alpha1
+kind: NodePool
+metadata:
+  name: gke-crossplane-np
+spec:
+  forProvider:
+    autoscaling:
+      autoprovisioned: false
+      enabled: true
+      maxNodeCount: 2
+      minNodeCount: 1  
+    clusterRef:
+      name: gke-crossplane-cluster
+    config:
+      # sandboxConfig:
+      #   sandboxType: gvisor
+      diskSizeGb: 100
+      # diskType: pd-ssd
+      imageType: cos_containerd
+      labels:
+        test-label: crossplane-created
+      machineType: n1-standard-4
+      oauthScopes:
+        - "https://www.googleapis.com/auth/devstorage.read_only"
+        - "https://www.googleapis.com/auth/logging.write"
+        - "https://www.googleapis.com/auth/monitoring"
+        - "https://www.googleapis.com/auth/servicecontrol"
+        - "https://www.googleapis.com/auth/service.management.readonly"
+        - "https://www.googleapis.com/auth/trace.append"
+    initialNodeCount: 2
+    locations:
+      - us-central1-a
+    management:
+      autoRepair: true
+      autoUpgrade: true
