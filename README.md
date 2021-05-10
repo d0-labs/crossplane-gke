@@ -14,6 +14,7 @@ Feel free to skip running `1-gcp_config.sh` if you're installing Crossplane else
 * A Google Cloud project
 * `glcoud` CLI
 * An existing GKE cluster (Crossplane will be installed here)
+* The [`envsubst`](https://kb.novaordis.com/index.php/Envsubst) tool installed on your local machine
 
 
 ### 1- Update the env_vars.sh file
