@@ -4,6 +4,8 @@
 
 For the full tutorial on how to use Crossplane to create a GKE cluster, check out our [blog post on Medium](https://medium.com/@dee_zero/cf5374d765ee?source=friends_link&sk=6654b27051a58815073b0613c8127def).
 
+Be sure to also check out our post on [Shifting from Infrastructure as Code to Infrastructure as Data](https://medium.com/@dee_zero/bdb1ae1840e3?source=friends_link&sk=4416407624889f0139bcb1d5b15ec1bb).
+
 ## Quickstart
 
 This code creates installs Crossplane on an existing GKE cluster, and provisions a new GKE cluster using Crossplane.
